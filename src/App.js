@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    Container,
+    Row,
+    Col
+} from 'reactstrap';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import CustomerForm from './CustomerForm'
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false
+        };
+    }
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+    render() {
+        return (
+            <div>
+                 <Navbar color="dark" dark expand="md">
+                    <br/>
+                    <br/>
+                    <NavbarBrand href="/">El Paso Child Guidance Center</NavbarBrand>
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink href="https://epcgc.org">EPCGC</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="#">Another Link</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Navbar>              
+                    <Container>
+                        <Row>
+                            <Col>
+                              <CustomerForm />
+                            </Col>
+                        </Row>
+                    </Container>               
+            </div>
+        );
+    }
 }
 
 export default App;
